@@ -1,0 +1,61 @@
+/* src/components/Playlist.css */
+.playlist-container {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+.playlist-container h3 {
+    margin-bottom: 1.5rem;
+    padding-left: 10px;
+    text-align: left;
+}
+.playlist {
+    list-style: none;
+    padding: 0;
+}
+.playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.playlist-item:hover, .playlist-item.active {
+    background-color: #282828;
+}
+.playlist-item-cover {
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.playlist-title-container {
+    flex-grow: 1;
+}
+.playlist-item-title {
+    font-size: 1rem;
+    color: var(--light-grey);
+}
+.playlist-item-artist {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: block;
+}
+.playing-icon {
+    color: var(--primary-color);
+    margin-right: 15px;
+    font-size: 0.8rem;
+}
+.playlist-item-arrow {
+    color: #666;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.playlist-item:hover .playlist-item-arrow, 
+.playlist-item.active .playlist-item-arrow {
+    transform: translateX(5px);
+    color: var(--primary-color);
+}

@@ -1,0 +1,58 @@
+/* src/components/Header.css */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--medium-grey);
+    border-bottom: 1px solid #282828;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.brand-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.header-btn:hover {
+    color: var(--light-grey);
+}
+/* Añadir al final de Header.css */
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Se asegura de que la imagen llene el círculo sin deformarse */
+    border-radius: 50%; /* Hace que la imagen también sea redonda */
+}

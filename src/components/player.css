@@ -1,0 +1,155 @@
+/* src/components/Player.css */
+.player-main {
+    flex: 1;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #282828;
+}
+#album-cover {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border: 8px solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+#album-cover.playing {
+    animation: spin 8s linear infinite;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.track-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+#track-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+#track-producer {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+.player-controls-container {
+    width: 100%;
+    max-width: 400px;
+    margin-top: auto;
+}
+.progress-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.progress-bar-wrapper {
+    flex-grow: 1;
+    height: 6px;
+    background-color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.progress-bar {
+    height: 100%;
+    background-color: var(--light-grey);
+    border-radius: 5px;
+}
+.progress-bar-wrapper:hover .progress-bar {
+    background-color: #1DB954; /* Color verde al pasar el mouse */
+}
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.progress-bar-wrapper:hover .progress-bar::after {
+    opacity: 1;
+}
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.control-btn:hover {
+    color: var(--light-grey);
+}
+.play-btn {
+    font-size: 2rem;
+    color: var(--dark-grey);
+    background-color: var(--light-grey);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.play-btn:hover {
+    transform: scale(1.1);
+    background-color: white;
+}
+#portfolio-details {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* --- ESTILOS CORREGIDOS --- */
+
+.artist-name {
+    font-size: 1.1rem;
+    color: white; /* <-- CAMBIADO A BLANCO */
+    font-weight: bold;
+}
+
+.spotify-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1DB954; /* <-- CAMBIADO a verde Spotify */
+    color: black;              /* <-- CAMBIADO a letra negra */
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+    border: none; /* Quitamos el borde negro que habíamos puesto */
+}
+
+.spotify-btn:hover {
+    background-color: #1ed760; /* Un verde más brillante */
+    transform: scale(1.05);
+}
+
+.spotify-btn svg {
+    /* Espacio entre el logo (ahora a la izquierda) y el texto */
+    margin-right: 8px; 
+    font-size: 1.2rem; /* Hacemos el logo un poco más grande */
+}
