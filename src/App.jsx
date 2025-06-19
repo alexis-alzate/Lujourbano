@@ -2,9 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import Playlist from './components/Playlist.jsx';
 import Player from './components/Player.jsx';
 import Header from './components/Header.jsx';
-
-// --- PASO 1: IMPORTAMOS LAS IMÁGENES DESDE LA CARPETA ASSETS ---
-// Asegúrate de que la ruta './assets/img/...' sea correcta.
 import cover1 from './assets/img/cover1.jpg';
 import cover2 from './assets/img/cover2.jpg';
 
@@ -12,14 +9,11 @@ function App() {
   const [beats, setBeats] = useState([
     {
       id: 1,
-      title: "Vibras de Verano",
+      title: "Tengo una Reina valera",
       producer: "Producido por Zaeta",
       artist: "Artista Famoso",
-      audioSrc: "/audio/beat1.mp3", // El audio se queda en la carpeta public
-      
-      // --- PASO 2: Usamos la variable importada (sin comillas) ---
-      coverSrc: cover1, 
-      
+      audioSrc: "/audio/Reina_valera.mp3",
+      coverSrc: cover1,
       genre: "Reggaeton",
       spotifyUrl: "https://www.spotify.com"
     },
@@ -29,18 +23,18 @@ function App() {
       producer: "Producido por Zaeta",
       artist: "Otro Artista",
       audioSrc: "/audio/beat2.mp3",
-
-      // --- PASO 2: Usamos la variable importada (sin comillas) ---
       coverSrc: cover2,
-
       genre: "Trap",
       spotifyUrl: "https://googleusercontent.com/spotify.com"
     }
   ]);
 
-  // --- El resto del código se queda exactamente igual ---
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  // --- CAMBIO 1: Creamos el estado para el término de búsqueda ---
+  const [searchTerm, setSearchTerm] = useState('');
+
   const audioRef = useRef(new Audio(beats[currentTrackIndex].audioSrc));
 
   useEffect(() => {
@@ -62,15 +56,20 @@ function App() {
   const handleNextTrack = () => setCurrentTrackIndex((prev) => (prev + 1) % beats.length);
   const handlePrevTrack = () => setCurrentTrackIndex((prev) => (prev - 1 + beats.length) % beats.length);
   const handleTrackSelect = (index) => {
-    setCurrentTrackIndex(index);
+    // Necesitamos encontrar el índice correcto en la lista original, no en la filtrada
+    const originalIndex = beats.findIndex(beat => beat.id === index);
+    setCurrentTrackIndex(originalIndex);
     setIsPlaying(true);
   };
 
-  return (
-   <div className="window-container">
-      {/* ⬇️ NUEVO COMPONENTE AÑADIDO ⬇️ */}
-      <Header currentBeat={beats[currentTrackIndex]} ></Header>
+  // --- CAMBIO 2: Creamos la lista filtrada antes de mostrarla ---
+  const filteredBeats = beats.filter(beat =>
+    beat.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
+  return (
+    <div className="window-container">
+      <Header currentBeat={beats[currentTrackIndex]} />
       <div id="beat-player">
         <Player 
           currentBeat={beats[currentTrackIndex]}
@@ -80,14 +79,13 @@ function App() {
           onPrev={handlePrevTrack}
           audioRef={audioRef}
         />
-        
-        
-        
+        {/* --- CAMBIO 3: Pasamos la lista filtrada y la función de búsqueda a la Playlist --- */}
         <Playlist 
-          beats={beats}
+          beats={filteredBeats}
           currentTrackIndex={currentTrackIndex}
           onTrackSelect={handleTrackSelect}
           isPlaying={isPlaying}
+          onSearchChange={setSearchTerm}
         />
       </div>
     </div>

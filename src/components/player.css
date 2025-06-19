@@ -153,3 +153,18 @@
     margin-right: 8px; 
     font-size: 1.2rem; /* Hacemos el logo un poco más grande */
 }
+/* Dentro de Player.css */
+
+/* En tu archivo Player.css */
+
+/* En tu archivo Player.css */
+
+.player-main {
+    flex: 0 0 50%; /* <-- CAMBIO CLAVE AQUÍ */
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-right: 1px solid #282828;
+}

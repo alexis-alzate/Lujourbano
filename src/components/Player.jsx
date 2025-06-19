@@ -1,4 +1,3 @@
-// src/components/Player.jsx
 import { useState, useEffect } from 'react';
 import './Player.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +15,7 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
   const [trackProgress, setTrackProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  // El useEffect que ya tenías para la barra de progreso
   useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => setTrackProgress(audio.currentTime);
@@ -28,13 +28,14 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
     };
   }, [audioRef]);
 
-  // Este efecto adicional se encarga de actualizar el título de la página
+  // --- El useEffect que Faltaba, Puesto en el Lugar Correcto ---
+  // Este efecto se encarga de actualizar el título de la página
   // cada vez que la canción cambia.
   useEffect(() => {
     if (currentBeat) {
       document.title = `${currentBeat.title} - ${currentBeat.artist || 'Beat en Venta'}`;
     }
-  }, [currentBeat]);
+  }, [currentBeat]); // La dependencia es 'currentBeat'
 
   const handleScrub = (e) => {
     if (duration) {
@@ -59,7 +60,6 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
               {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
               {currentBeat.spotifyUrl && (
                 <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-btn">
-                  {/* ORDEN CORREGIDO: Ícono primero, luego el texto */}
                   <FontAwesomeIcon icon={faSpotify} /> 
                   <span>Escuchar en Spotify</span>
                 </a>

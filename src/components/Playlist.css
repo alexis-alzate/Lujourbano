@@ -59,3 +59,42 @@
     transform: translateX(5px);
     color: var(--primary-color);
 }
+/* Añadir a src/components/Playlist.css */
+
+.search-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem; /* Espacio para el ícono */
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 25px;
+    color: var(--light-grey);
+    font-size: 1rem;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+.playlist-container {
+    flex: 0 0 50%; /* <-- ORDEN ESTRICTA: No crecer, no encogerse, base del 50% */
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    overflow-y: auto;
+}
