@@ -1,24 +1,26 @@
-/* src/components/Player.css */
-.player-main {
-    flex: 1;
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #282828;
-}
-#album-cover {
+/* Reemplaza cualquier regla #album-cover con estas tres */
+
+/* 1. El "marco" con el tamaño y forma fijos */
+.album-cover-wrapper {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 2rem;
-    border: 8px solid var(--primary-color);
+    border: 4px solid var(--primary-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden; /* Muy importante: recorta lo que se salga del círculo */
+    flex-shrink: 0; /* Evita que el marco se encoja */
 }
-#album-cover.playing {
+
+/* 2. La animación de giro ahora se aplica al marco */
+.album-cover-wrapper.playing {
     animation: spin 8s linear infinite;
+}
+
+/* 3. La imagen ahora solo se preocupa de llenar el marco */
+.album-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* La magia para que no se deforme */
 }
 @keyframes spin {
     from { transform: rotate(0deg); }

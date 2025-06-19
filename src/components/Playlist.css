@@ -98,3 +98,11 @@
     padding: 1.5rem;
     overflow-y: auto;
 }
+/* --- REGLAS DE ESTABILIDAD PARA LOS ÍCONOS --- */
+.playlist-item-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40px; /* Ancho fijo para el contenedor de los íconos */
+    flex-shrink: 0; /* Impide que se encoja */
+}

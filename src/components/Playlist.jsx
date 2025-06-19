@@ -11,7 +11,7 @@ function Playlist({ beats, currentTrackIndex, onTrackSelect, isPlaying, onSearch
 
       {/* --- BARRA DE BÚSQUEDA AÑADIDA --- */}
       <div className="search-container">
-        <FontAwesomeIcon icon={faSearch} className="search-icon" />
+        <FontAwesomeIcon icon={faSearch} className="search-icon" fixedWidth />
         <input 
           type="text" 
           className="search-input"
@@ -34,8 +34,11 @@ function Playlist({ beats, currentTrackIndex, onTrackSelect, isPlaying, onSearch
               <span className="playlist-item-title">{beat.title}</span>
               <span className="playlist-item-artist">{beat.artist || 'Beat en Venta'}</span>
             </div>
-            {beats[currentTrackIndex]?.id === beat.id && isPlaying && <FontAwesomeIcon icon={faVolumeHigh} className="playing-icon"/>}
-            <FontAwesomeIcon icon={faChevronRight} className="playlist-item-arrow"/>
+           
+            <div className="playlist-item-icons">
+            {beats[currentTrackIndex]?.id === beat.id && isPlaying && <FontAwesomeIcon icon={faVolumeHigh} className="playing-icon" fixedWidth />}
+            <FontAwesomeIcon icon={faChevronRight}  className="playlist-item-arrow" fixedWidth />
+            </div>
           </li>
         ))}
       </ul>

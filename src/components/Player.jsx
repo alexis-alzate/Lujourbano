@@ -15,7 +15,6 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
   const [trackProgress, setTrackProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  // El useEffect que ya tenías para la barra de progreso
   useEffect(() => {
     const audio = audioRef.current;
     const updateProgress = () => setTrackProgress(audio.currentTime);
@@ -28,14 +27,11 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
     };
   }, [audioRef]);
 
-  // --- El useEffect que Faltaba, Puesto en el Lugar Correcto ---
-  // Este efecto se encarga de actualizar el título de la página
-  // cada vez que la canción cambia.
   useEffect(() => {
     if (currentBeat) {
       document.title = `${currentBeat.title} - ${currentBeat.artist || 'Beat en Venta'}`;
     }
-  }, [currentBeat]); // La dependencia es 'currentBeat'
+  }, [currentBeat]);
 
   const handleScrub = (e) => {
     if (duration) {
@@ -50,7 +46,10 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
 
   return (
     <div className="player-main">
-        <img src={currentBeat.coverSrc} alt={currentBeat.title} id="album-cover" className={isPlaying ? 'playing' : ''} />
+        {/* --- CAMBIO AQUÍ: Implementamos el "Marco de Fotos" --- */}
+        <div className={`album-cover-wrapper ${isPlaying ? 'playing' : ''}`}>
+          <img src={currentBeat.coverSrc} alt={currentBeat.title} />
+        </div>
         
         <div className="track-info">
             <h2 id="track-title">{currentBeat.title}</h2>
@@ -81,8 +80,8 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
                 <button className="control-btn play-btn" onClick={onPlayPause}>
                     <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
                 </button>
-                <button className="control-btn" onClick={onNext}><FontAwesomeIcon icon={faForward} /></button>
-                <button className="control-btn"><FontAwesomeIcon icon={faRedo} /></button>
+                <button className="control-btn" onClick={onNext}><FontAwesomeIcon icon={faForward} fixedWidth/></button>
+                <button className="control-btn"><FontAwesomeIcon icon={faRedo} fixedWidth  /></button>
             </div>
         </div>
     </div>
