@@ -26,16 +26,19 @@ body {
 
 /* --- ESTILOS DE LAYOUT PRINCIPAL (LAS LÍNEAS QUE FALTABAN) --- */
 
+/* En src/index.css */
+
 .window-container {
     background-color: var(--medium-grey);
-    border-radius: 12px;
+    border-radius: 24px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
     overflow: hidden;
-    border: 1px solid #282828;
-    width: 100%;
-    max-width: 1100px; /* El tamaño que queríamos */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* <-- CAMBIADO a un borde blanco y sutil */
+   /* border: 1px solid #282828;
+    
+    /* --- CAMBIO CLAVE AQUÍ --- */
+    width: 800px; /* Ancho fijo, no se encogerá */
 }
-
 #beat-player {
     display: flex; /* La magia de las dos columnas */
 }

@@ -53,10 +53,11 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
         
         <div className="track-info">
             <h2 id="track-title">{currentBeat.title}</h2>
+           {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
             <p id="track-producer">{currentBeat.producer}</p>
             
             <div id="portfolio-details">
-              {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
+              
               {currentBeat.spotifyUrl && (
                 <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-btn">
                   <FontAwesomeIcon icon={faSpotify} /> 

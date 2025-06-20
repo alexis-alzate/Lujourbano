@@ -4,29 +4,46 @@ import Player from './components/Player.jsx';
 import Header from './components/Header.jsx';
 import cover1 from './assets/img/cover1.jpg';
 import cover2 from './assets/img/cover2.jpg';
+import cover3 from  './assets/img/cover3.jpg';
 
 function App() {
   const [beats, setBeats] = useState([
     {
       id: 1,
       title: "Tengo una Reina valera",
-      producer: "Producido por Zaeta",
+      producer: "Jesus Family",
       artist: "Artista Famoso",
       audioSrc: "/audio/Reina_valera.mp3",
       coverSrc: cover1,
-      genre: "Reggaeton",
-      spotifyUrl: "https://www.spotify.com"
+      genre: "Trap",
+      spotifyUrl: "https://open.spotify.com/intl-es/track/5YIiEZRb3TU1U5LMs7FRsN"
     },
     {
       id: 2,
-      title: "Noche en Medallo",
+      title: "Hoy me levante",
       producer: "Producido por Zaeta",
-      artist: "Otro Artista",
-      audioSrc: "/audio/beat2.mp3",
+      artist: "Polimaba",
+      audioSrc: "/audio/Hoy me levante.mp3",
       coverSrc: cover2,
       genre: "Trap",
-      spotifyUrl: "https://googleusercontent.com/spotify.com"
+      spotifyUrl: "https://open.spotify.com/intl-es/album/19v1XTZ87SSchYjYAiEbWs"
+    },
+  
+  {
+      id: 3,
+      title: "Mano arriba",
+      producer: "Producido por Zaeta",
+      artist: "Julian Ramos",
+      audioSrc: "/audio/Mano arrimba.wav",
+      coverSrc: cover3,
+      genre: "Trap",
+      spotifyUrl: "https://open.spotify.com/intl-es/album/6kih0fAozoCEncepF8PhuI"
     }
+  
+  
+  
+  
+  
   ]);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);

@@ -1,26 +1,31 @@
-/* Reemplaza cualquier regla #album-cover con estas tres */
-
-/* 1. El "marco" con el tamaño y forma fijos */
+/* src/components/Player.css */
+.player-main {
+    flex: 0 0 50%;
+    min-width: 0;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #282828;
+}
 .album-cover-wrapper {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    border: 4px solid var(--primary-color);
+    border: 8px solid var(--primary-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    overflow: hidden; /* Muy importante: recorta lo que se salga del círculo */
-    flex-shrink: 0; /* Evita que el marco se encoja */
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: 2rem; /* Espacio arriba de la carátula */
+    margin-bottom: 3rem; /* Espacio debajo de la carátula */
 }
-
-/* 2. La animación de giro ahora se aplica al marco */
 .album-cover-wrapper.playing {
     animation: spin 8s linear infinite;
 }
-
-/* 3. La imagen ahora solo se preocupa de llenar el marco */
 .album-cover-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* La magia para que no se deforme */
+    object-fit: cover;
 }
 @keyframes spin {
     from { transform: rotate(0deg); }
@@ -28,21 +33,70 @@
 }
 .track-info {
     text-align: center;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    margin-bottom: 0rem; /* Más espacio debajo del botón de Spotify */
+    min-width: 0;
 }
 #track-title {
     font-size: 1.8rem;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #track-producer {
     color: var(--text-muted);
     font-size: 1rem;
     margin-top: 0.5rem;
+     margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    
+}
+#portfolio-details {
+    margin-top: 0.5rem;
+    min-height: 80px; /* Esto ya lo teníamos para la estabilidad */
+
+    /* --- LÍNEAS PARA EL CENTRADO PERFECTO --- */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.artist-name {
+    font-size: 1.1rem;
+    color: white;
+    font-weight: bold;
+     margin-top: 1rem; /* <-- AÑADIDO para crear espacio arriba */
+}
+.spotify-btn {
+    display: flex; /* Activa Flexbox para el botón */
+    align-items: center; /* Centra verticalmente el ícono y el texto */
+    justify-content: center; /* Centra horizontalmente el ícono y el texto */
+    
+    width: 230px; /* Ancho fijo que querías */
+    background-color: #1DB954; /* El verde de Spotify */
+    color: black;              /* Letra negra */
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.spotify-btn:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+.spotify-btn svg {
+    margin-right: 8px; /* Espacio entre el logo (a la izquierda) y el texto */
+    font-size: 1.2rem;
 }
 .player-controls-container {
     width: 100%;
     max-width: 400px;
-    margin-top: auto;
+    margin-top: auto; /* Empuja los controles hacia abajo */
 }
 .progress-container {
     width: 100%;
@@ -63,9 +117,10 @@
     height: 100%;
     background-color: var(--light-grey);
     border-radius: 5px;
+    position: relative;
 }
 .progress-bar-wrapper:hover .progress-bar {
-    background-color: #1DB954; /* Color verde al pasar el mouse */
+    background-color: #1DB954;
 }
 .progress-bar::after {
     content: '';
@@ -98,9 +153,11 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.2s ease;
+   
 }
 .control-btn:hover {
     color: var(--light-grey);
+    
 }
 .play-btn {
     font-size: 2rem;
@@ -112,61 +169,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .play-btn:hover {
     transform: scale(1.1);
-    background-color: white;
-}
-#portfolio-details {
-    margin-top: 1rem;
-    text-align: center;
-}
-
-/* --- ESTILOS CORREGIDOS --- */
-
-.artist-name {
-    font-size: 1.1rem;
-    color: white; /* <-- CAMBIADO A BLANCO */
-    font-weight: bold;
-}
-
-.spotify-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #1DB954; /* <-- CAMBIADO a verde Spotify */
-    color: black;              /* <-- CAMBIADO a letra negra */
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-    transition: all 0.2s ease;
-    border: none; /* Quitamos el borde negro que habíamos puesto */
-}
-
-.spotify-btn:hover {
-    background-color: #1ed760; /* Un verde más brillante */
-    transform: scale(1.05);
-}
-
-.spotify-btn svg {
-    /* Espacio entre el logo (ahora a la izquierda) y el texto */
-    margin-right: 8px; 
-    font-size: 1.2rem; /* Hacemos el logo un poco más grande */
-}
-/* Dentro de Player.css */
-
-/* En tu archivo Player.css */
-
-/* En tu archivo Player.css */
-
-.player-main {
-    flex: 0 0 50%; /* <-- CAMBIO CLAVE AQUÍ */
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-right: 1px solid #282828;
+    background-color: #1ed760;
 }
