@@ -11,8 +11,8 @@ function App() {
     {
       id: 1,
       title: "Tengo una Reina valera",
-      producer: "Jesus Family",
-      artist: "Artista Famoso",
+      producer: "Zaeta Music",
+      artist: "Jesus Family",
       audioSrc: "/audio/Reina_valera.mp3",
       coverSrc: cover1,
       genre: "Trap",
@@ -21,7 +21,7 @@ function App() {
     {
       id: 2,
       title: "Hoy me levante",
-      producer: "Producido por Zaeta",
+      producer: "Producido por Zaeta Music",
       artist: "Polimaba",
       audioSrc: "/audio/Hoy me levante.mp3",
       coverSrc: cover2,
@@ -32,7 +32,7 @@ function App() {
   {
       id: 3,
       title: "Mano arriba",
-      producer: "Producido por Zaeta",
+      producer: "Producido por Zaeta Music",
       artist: "Julian Ramos",
       audioSrc: "/audio/Mano arrimba.wav",
       coverSrc: cover3,
