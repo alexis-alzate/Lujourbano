@@ -11,7 +11,7 @@ function App() {
     {
       id: 1,
       title: "Tengo una Reina valera",
-      producer: "Zaeta Music",
+      producer: "Producido por  Zaeta Music",
       artist: "Jesus Family",
       audioSrc: "/audio/Reina_valera.mp3",
       coverSrc: cover1,
