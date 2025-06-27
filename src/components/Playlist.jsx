@@ -24,8 +24,8 @@ function Playlist({ beats, currentTrackIndex, onTrackSelect, isPlaying, onSearch
       <ul className="playlist">
         {beats.map((beat) => (
           // El onClick ahora usa el 'id' para ser más robusto con el filtrado
-          <li 
-            key={beat.id} 
+          <li
+            key={beat.id}
             className={`playlist-item ${beats[currentTrackIndex]?.id === beat.id ? 'active' : ''}`}
             onClick={() => onTrackSelect(beat.id)}
           >
@@ -34,10 +34,10 @@ function Playlist({ beats, currentTrackIndex, onTrackSelect, isPlaying, onSearch
               <span className="playlist-item-title">{beat.title}</span>
               <span className="playlist-item-artist">{beat.artist || 'Beat en Venta'}</span>
             </div>
-           
+
             <div className="playlist-item-icons">
-            {beats[currentTrackIndex]?.id === beat.id && isPlaying && <FontAwesomeIcon icon={faVolumeHigh} className="playing-icon" fixedWidth />}
-            <FontAwesomeIcon icon={faChevronRight}  className="playlist-item-arrow" fixedWidth />
+              {beats[currentTrackIndex]?.id === beat.id && isPlaying && <FontAwesomeIcon icon={faVolumeHigh} className="playing-icon" fixedWidth />}
+              <FontAwesomeIcon icon={faChevronRight} className="playlist-item-arrow" fixedWidth />
             </div>
           </li>
         ))}
