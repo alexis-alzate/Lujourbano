@@ -4,9 +4,16 @@ import Player from './components/Player.jsx';
 import Header from './components/Header.jsx';
 import cover1 from './assets/img/cover1.jpg';
 import cover2 from './assets/img/cover2.jpg';
-import cover3 from  './assets/img/cover3.jpg';
+import cover3 from  './assets/img/cover3.jpg'; /* importamos las imagens que estan guardadas en la carpeta img */
 
 function App() {
+  
+  //es una  variable que no se puede cambiar
+  // beats es una variable donde guarda la lista de los ritmos
+  //setbeats contiene una función especial que se usa para Actualizar el valor de beats
+  //sencillamente se usa para que se actualice la canción cundo se le da siguiente
+  //usestate es la llamada al hook de react
+  //useState  recordar información, si no lo usamos es como react no tuviera memoria 
   const [beats, setBeats] = useState([
     {
       id: 1,
