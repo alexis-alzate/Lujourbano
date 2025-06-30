@@ -1,0 +1,41 @@
+    /* src/components/ProducerProfile.css (Versión Final) */
+    .producer-profile-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    }
+
+    .player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    }
+
+    .control-btn {
+    background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; transition: color 0.2s ease;
+    }
+    .control-btn:hover { color: var(--text-light); }
+
+    .play-pause-btn {
+    background-color: var(--text-light); color: var(--background-dark); width: 50px; height: 50px; border-radius: 50%; display: flex;
+    justify-content: center; align-items: center; font-size: 1.5rem; transition: transform 0.2s ease;
+    }
+    .play-pause-btn:hover { transform: scale(1.1); color: var(--background-dark); }
+
+    .time-display { color: var(--text-muted); font-size: 0.9rem; min-width: 40px; text-align: center; }
+
+    .behind-the-track { text-align: center; margin: 1.5rem 0; }
+    .behind-the-track h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .behind-the-track p { color: var(--text-muted); line-height: 1.6; max-width: 450px; margin: 0 auto; }
+
+    .action-buttons { display: flex; gap: 1rem; max-width: 450px; margin: 1.5rem auto 0 auto; width: 100%; }
+    .action-buttons button {
+    flex-grow: 1; padding: 1rem; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s ease; border: none;
+    }
+    .spotify-btn { background-color: var(--spotify-green); color: white; }
+    .spotify-btn:hover { filter: brightness(1.2); }
+    .collab-btn { background-color: transparent; color: var(--text-light); border: 1px solid var(--border-color); }
+    .collab-btn:hover { background-color: var(--border-color); }

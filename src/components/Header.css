@@ -1,65 +1,21 @@
-/* src/components/Header.css */
-
-.app-header {
-    display: flex;
-    justify-content: space-between; /* Empuja los elementos a los extremos */
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background-color: var(--medium-grey);
-    border-bottom: 1px solid #282828;
-
-    /* --- REGLAS DE ESTABILIDAD --- */
-    height: 75px; /* Le damos una altura fija para que nunca cambie */
-    flex-shrink: 0; /* Le prohibimos encogerse */
-}
-
-.brand {
+    /* src/components/Header.css */
+    .header-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
+    margin-bottom: 2rem;
+    padding: 1rem;
+    }
 
-/* El "marco" para el logo */
-.brand-logo {
-    width: 40px;
-    height: 40px;
-    background-color: var(--primary-color);
+    .header-avatar {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: black;
-    overflow: hidden; /* Importante para que la imagen de adentro no se salga */
-}
-
-/* La imagen que se adapta al marco */
-.brand-logo img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-}
+    border: 2px solid var(--border-color);
+    }
 
-.brand-name {
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.header-controls {
-    display: flex;
-    gap: 1rem;
-}
-
-.header-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.header-btn:hover {
-    color: var(--light-grey);
-}
+    .header-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-left: 1.5rem;
+    }

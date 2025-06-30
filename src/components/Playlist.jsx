@@ -1,48 +1,43 @@
 // src/components/Playlist.jsx
-import './Playlist.css';
+
+import React from 'react';
+import './Playlist.css'; // Usaremos un nuevo CSS
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faVolumeHigh, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlay } from '@fortawesome/free-solid-svg-icons';
 
-// Asegúrate de que reciba 'onSearchChange' desde App.jsx
-function Playlist({ beats, currentTrackIndex, onTrackSelect, isPlaying, onSearchChange }) {
-  return (
-    <div className="playlist-container">
-      <h3>Portafolio</h3>
-
-      {/* --- BARRA DE BÚSQUEDA AÑADIDA --- */}
-      <div className="search-container">
-        <FontAwesomeIcon icon={faSearch} className="search-icon" fixedWidth />
-        <input 
-          type="text" 
-          className="search-input"
-          placeholder="Filtrar por nombre..."
-          onChange={e => onSearchChange(e.target.value)} 
-        />
-      </div>
-      {/* --- FIN DE LA BARRA DE BÚSQUEDA --- */}
-
-      <ul className="playlist">
-        {beats.map((beat) => (
-          // El onClick ahora usa el 'id' para ser más robusto con el filtrado
-          <li
-            key={beat.id}
-            className={`playlist-item ${beats[currentTrackIndex]?.id === beat.id ? 'active' : ''}`}
-            onClick={() => onTrackSelect(beat.id)}
-          >
-            <img src={beat.coverSrc} alt={beat.title} className="playlist-item-cover" />
-            <div className="playlist-title-container">
-              <span className="playlist-item-title">{beat.title}</span>
-              <span className="playlist-item-artist">{beat.artist || 'Beat en Venta'}</span>
-            </div>
-
-            <div className="playlist-item-icons">
-              {beats[currentTrackIndex]?.id === beat.id && isPlaying && <FontAwesomeIcon icon={faVolumeHigh} className="playing-icon" fixedWidth />}
-              <FontAwesomeIcon icon={faChevronRight} className="playlist-item-arrow" fixedWidth />
-            </div>
-          </li>
-        ))}
-      </ul>
+// Le pasamos la lista de beats y las funciones necesarias
+function Playlist({ beats, onTrackSelect, currentTrackIndex, isPlaying }) {
+return (
+<div className="playlist-container">
+    {/* --- Barra de Búsqueda --- */}
+    <div className="search-bar">
+    <FontAwesomeIcon icon={faSearch} className="search-icon" />
+    <input type="text" placeholder="Search Producer..." />
     </div>
-  );
+
+    {/* --- Lista de Canciones --- */}
+    <ul className="track-list">
+    {beats.map((beat, index) => (
+        <li 
+        key={beat.id} 
+        // La clase cambia si la canción está activa
+        className={`track-item ${index === currentTrackIndex ? 'active' : ''}`}
+        onClick={() => onTrackSelect(beat.id)} // Ojo: Pasamos el ID, no el index
+        >
+        <img src={beat.coverSrc} alt={beat.title} className="track-item-cover" />
+        <div className="track-item-info">
+            <span className="track-item-title">{beat.title}</span>
+            <span className="track-item-producer">{beat.producer}</span>
+        </div>
+        {/* Mostramos un ícono de play si la canción está activa y sonando */}
+        {index === currentTrackIndex && isPlaying && (
+            <FontAwesomeIcon icon={faPlay} className="playing-icon" />
+        )}
+        </li>
+    ))}
+    </ul>
+</div>
+);
 }
+
 export default Playlist;

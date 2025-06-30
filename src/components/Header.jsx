@@ -1,29 +1,14 @@
-// src/components/Header.jsx
-import './Header.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+    // src/components/Header.jsx
+    import React from 'react';
+    import './Header.css';
 
-// Ahora el Header recibe el 'currentBeat' como prop
-function Header({ currentBeat }) {
-  return (
-    <header className="app-header">
-      <div className="brand">
-        <div className="brand-logo">
-          {/* Si existe un currentBeat, muestra su imagen. Si no, muestra la "Z". */}
-          {currentBeat ? (
-            <img src={currentBeat.coverSrc} alt="Carátula del beat actual" />
-          ) : (
-            'Z'
-          )}
+    function Header({ name, imageUrl }) {
+    return (
+        <div className="header-container">
+        <img src={imageUrl} alt={name} className="header-avatar" />
+        <h1 className="header-name">{name}</h1>
         </div>
-        <span className="brand-name">ZaetaMusic</span>
-      </div>
-      <div className="header-controls">
-        <button className="header-btn"><FontAwesomeIcon icon={faSearch} fixedWidth  /></button>
-        <button className="header-btn"><FontAwesomeIcon icon={faBars} fixedWidth /></button>
-      </div>
-    </header>
-  );
-}
+    );
+    }
 
-export default Header;
+    export default Header;

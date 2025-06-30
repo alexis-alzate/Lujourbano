@@ -1,0 +1,22 @@
+/* Espacio para el contenedor de la onda */
+.waveform-container {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* --- Animación para las Ondas de Sonido --- */
+@keyframes bounce {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.7);
+  }
+}
+
+/* Se aplica a la onda cuando está en reproducción */
+/* (Este selector es para la nueva onda continua) */
+.waveform-playing wave > canvas {
+  animation: bounce 1.2s ease-in-out infinite;
+  animation-play-state: running;
+}
