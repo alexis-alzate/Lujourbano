@@ -10,17 +10,19 @@ function Header({ currentBeat }) {
       <div className="brand">
         <div className="brand-logo">
           {/* Si existe un currentBeat, muestra su imagen. Si no, muestra la "Z". */}
-          {currentBeat ? (
+  {/*    {currentBeat ? (
             <img src={currentBeat.coverSrc} alt="Carátula del beat actual" />
           ) : (
             'Z'
-          )}
+          )} */}
         </div>
         <span className="brand-name">LujoUrban</span>
       </div>
       <div className="header-controls">
         <button className="header-btn"><FontAwesomeIcon icon={faSearch} fixedWidth  /></button>
         <button className="header-btn"><FontAwesomeIcon icon={faBars} fixedWidth /></button>
+        
+            
       </div>
     </header>
   );

@@ -1,64 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
 import Playlist from './components/Playlist.jsx';
-import Player from './components/Player.jsx';
-import Header from './components/Header.jsx';
+import Player from './components/Player.jsx'; // <-- VOLVEMOS A IMPORTAR EL PLAYER ORIGINAL
+import ProducerHeader from './components/ProducerHeader.jsx';
 import cover1 from './assets/img/cover1.jpg';
 import cover2 from './assets/img/cover2.jpg';
-import cover3 from  './assets/img/cover3.jpg'; /* importamos las imagens que estan guardadas en la carpeta img */
+import cover3 from './assets/img/cover3.jpg';
+import cover4 from './assets/img/cover4.jpg'; 
 
 function App() {
-  
-  //es una  variable que no se puede cambiar
-  // beats es una variable donde guarda la lista de los ritmos
-  //setbeats contiene una función especial que se usa para Actualizar el valor de beats
-  //sencillamente se usa para que se actualice la canción cundo se le da siguiente
-  //usestate es la llamada al hook de react
-  //useState  recordar información, si no lo usamos es como react no tuviera memoria 
   const [beats, setBeats] = useState([
-    {
-      id: 1,
-      title: "Tengo una Reina valera",
-      producer: "Producido por  Zaeta Music",
-      artist: "Jesus Family",
-      audioSrc: "/audio/Reina_valera.mp3",
-      coverSrc: cover1,
-      genre: "Trap",
-      spotifyUrl: "https://open.spotify.com/intl-es/track/5YIiEZRb3TU1U5LMs7FRsN"
-    },
-    {
-      id: 2,
-      title: "Hoy me levante",
-      producer: "Producido por Zaeta Music",
-      artist: "Polimaba",
-      audioSrc: "/audio/Hoy me levante.mp3",
-      coverSrc: cover2,
-      genre: "Trap",
-      spotifyUrl: "https://open.spotify.com/intl-es/album/19v1XTZ87SSchYjYAiEbWs"
-    },
-  
-  {
-      id: 3,
-      title: "Mano arriba",
-      producer: "Producido por Zaeta Music",
-      artist: "Julian Ramos",
-      audioSrc: "/audio/Mano arrimba.wav",
-      coverSrc: cover3,
-      genre: "Trap",
-      spotifyUrl: "https://open.spotify.com/intl-es/album/6kih0fAozoCEncepF8PhuI"
-    }
-  
-  
-  
-  
-  
+    { id: 1, title: "Tengo una Reina valera", producer: "Producido por Zaeta Music", artist: "Jesus Family", audioSrc: "/audio/Reina_valera.mp3", coverSrc: cover1, genre: "Trap", spotifyUrl: "https://open.spotify.com/intl-es/track/5YIiEZRb3TU1U5LMs7FRsN" },
+    { id: 2, title: "Hoy me levante", producer: "Producido por Zaeta Music", artist: "Polimaba", audioSrc: "/audio/Hoy me levante.mp3", coverSrc: cover2, genre: "Trap", spotifyUrl: "https://open.spotify.com/intl-es/album/19v1XTZ87SSchYjYAiEbWs" },
+    { id: 3, title: "Mano arriba", producer: "Producido por Zaeta Music", artist: "Julian Ramos", audioSrc: "/audio/Mano arrimba.wav", coverSrc: cover3, genre: "Trap", spotifyUrl: "https://open.spotify.com/intl-es/album/6kih0fAozoCEncepF8PhuI" }
   ]);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  
-  // --- CAMBIO 1: Creamos el estado para el término de búsqueda ---
   const [searchTerm, setSearchTerm] = useState('');
-
   const audioRef = useRef(new Audio(beats[currentTrackIndex].audioSrc));
 
   useEffect(() => {
@@ -79,21 +37,24 @@ function App() {
   const handlePlayPause = () => setIsPlaying(!isPlaying);
   const handleNextTrack = () => setCurrentTrackIndex((prev) => (prev + 1) % beats.length);
   const handlePrevTrack = () => setCurrentTrackIndex((prev) => (prev - 1 + beats.length) % beats.length);
-  const handleTrackSelect = (index) => {
-    // Necesitamos encontrar el índice correcto en la lista original, no en la filtrada
-    const originalIndex = beats.findIndex(beat => beat.id === index);
-    setCurrentTrackIndex(originalIndex);
-    setIsPlaying(true);
+  
+  const handleTrackSelect = (beatId) => {
+    const trackIndex = beats.findIndex(beat => beat.id === beatId);
+    if (trackIndex !== -1) {
+      setCurrentTrackIndex(trackIndex);
+      setIsPlaying(true);
+    }
   };
 
-  // --- CAMBIO 2: Creamos la lista filtrada antes de mostrarla ---
-  const filteredBeats = beats.filter(beat =>
-    beat.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBeats = beats
+    .map((beat, index) => ({ ...beat, originalIndex: index }))
+    .filter(beat =>
+      beat.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   return (
     <div className="window-container">
-      <Header currentBeat={beats[currentTrackIndex]} />
+   <ProducerHeader producerName="ZaetaMusic" producerImageSrc={cover4} />
       <div id="beat-player">
         <Player 
           currentBeat={beats[currentTrackIndex]}
@@ -103,7 +64,6 @@ function App() {
           onPrev={handlePrevTrack}
           audioRef={audioRef}
         />
-        {/* --- CAMBIO 3: Pasamos la lista filtrada y la función de búsqueda a la Playlist --- */}
         <Playlist 
           beats={filteredBeats}
           currentTrackIndex={currentTrackIndex}

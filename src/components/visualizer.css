@@ -1,0 +1,12 @@
+.visualizer-canvas {
+width: 100%;
+max-width: 300px;
+height: 130px;
+margin-bottom: 2rem;
+
+}
+.progress-bar {
+background-color: #1db954; /* El verde de Spotify, similar al tuyo */
+height: 6px;
+border-radius: 3px;
+}

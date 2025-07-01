@@ -1,7 +1,7 @@
 :root {
   --primary-color: #ff6a00;
-  --dark-grey: #121212;
-  --medium-grey: #1e1e1e;
+  --dark-grey: #1c1f25;
+  --medium-grey: #1c1f25;
   --light-grey: #e0e0e0;
   --text-muted: #b3b3b3;
 }
@@ -33,10 +33,7 @@ body {
   width: 800px; /* Ancho fijo para PC */
 }
 
-#beat-player {
-  display: flex;
-  flex-direction: row; /* Dirección por defecto para PC */
-}
+
 
 /* --- REGLAS PARA RESPONSIVE EN CELULAR --- */
 @media (max-width: 850px) {
@@ -53,10 +50,13 @@ body {
     border-radius: 0;
     border: none;
   }
-
-  #beat-player {
-    /* ...cambia la dirección a columnas (uno encima del otro) */
-    flex-direction: column;
-  }
+#beat-player {
+    display: flex;
+    flex-grow: 1; /* Permite que ocupe el espacio vertical restante */
+    /* --- NUEVOS AJUSTES DE LAYOUT --- */
+    flex-direction: column; /* Organiza los elementos internos en columna */
+    justify-content: flex-start; /* Alinea los elementos al inicio (arriba) del contenedor */
+    align-items: stretch; /* Estira los elementos horizontalmente para que ocupen todo el ancho */
+}
 }
 /* --- REGLAS PARA RESPONSIVE EN CELULAR --- */

@@ -1,0 +1,28 @@
+    /* src/components/ProducerHeader.css */
+    .producer-header {
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    border-bottom: 1px solid #282828; /* Separador sutil */
+    }
+
+    .producer-image-wrapper {
+    width: 160px; /* Ajusta el tamaño de la foto */
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 25px;
+    border: 2px solid var(--primary-color); /* Un toque de tu color naranja */
+    }
+
+    .producer-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .producer-name {
+    color: var(--light-grey);
+    font-size: 1.5rem;
+    margin: 10;
+    }

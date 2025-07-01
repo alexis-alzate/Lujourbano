@@ -63,7 +63,7 @@
 
 .search-container {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .search-icon {
@@ -93,7 +93,7 @@
     border-color: var(--primary-color);
 }
 .playlist-container {
-    flex: 0 0 50%; /* <-- ORDEN ESTRICTA: No crecer, no encogerse, base del 50% */
+   
     background-color: rgba(0, 0, 0, 0.2);
     padding: 1.5rem;
     overflow-y: auto;

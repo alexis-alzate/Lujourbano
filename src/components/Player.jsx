@@ -3,6 +3,7 @@ import './Player.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faForward, faBackward, faRandom, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import Visualizer from './Visualizer.jsx'; // Importamos nuestro nuevo componente
 
 const formatTime = (seconds) => {
   if (isNaN(seconds) || seconds < 0) return '0:00';
@@ -25,7 +26,7 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
       audio.removeEventListener('timeupdate', updateProgress);
       audio.removeEventListener('loadedmetadata', setAudioDuration);
     };
-  }, [audioRef]);
+  }, [audioRef, currentBeat]);
 
   useEffect(() => {
     if (currentBeat) {
@@ -46,27 +47,14 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
 
   return (
     <div className="player-main">
-        {/* --- CAMBIO AQUÍ: Implementamos el "Marco de Fotos" --- */}
-        <div className={`album-cover-wrapper ${isPlaying ? 'playing' : ''}`}>
-          <img src={currentBeat.coverSrc} alt={currentBeat.title} />
-        </div>
+        {/* --- REEMPLAZAMOS LA CARÁTULA POR EL VISUALIZADOR --- */}
+        <Visualizer audioRef={audioRef} isPlaying={isPlaying} />
         
         <div className="track-info">
-            <h2 id="track-title">{currentBeat.title}</h2>
-           {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
-            <p id="track-producer">{currentBeat.producer}</p>
+           {/*  <h2 id="track-title">{currentBeat.title}</h2> */}
+           {/*  <p id="track-producer">{currentBeat.producer}</p> */}
+           {/*  {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>} */}
             
-            <div id="portfolio-details">
-              
-              {currentBeat.spotifyUrl && (
-                <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-btn">
-                  <FontAwesomeIcon icon={faSpotify} /> 
-                  <span>Escuchar en Spotify</span>
-                </a>
-              )}
-            </div>
-        </div>
-
         <div className="player-controls-container">
             <div className="progress-container">
                 <span>{formatTime(trackProgress)}</span>
@@ -76,15 +64,38 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
                 <span>{formatTime(duration)}</span>
             </div>
             <div className="player-controls">
-                <button className="control-btn"><FontAwesomeIcon icon={faRandom} /></button>
-                <button className="control-btn" onClick={onPrev}><FontAwesomeIcon icon={faBackward} /></button>
+                <button className="control-btn"><FontAwesomeIcon icon={faRandom} fixedWidth /></button>
+                <button className="control-btn" onClick={onPrev}><FontAwesomeIcon icon={faBackward} fixedWidth /></button>
                 <button className="control-btn play-btn" onClick={onPlayPause}>
-                    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+                    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} fixedWidth />
                 </button>
-                <button className="control-btn" onClick={onNext}><FontAwesomeIcon icon={faForward} fixedWidth/></button>
-                <button className="control-btn"><FontAwesomeIcon icon={faRedo} fixedWidth  /></button>
+              <button className="control-btn" onClick={onNext}><FontAwesomeIcon icon={faForward} fixedWidth /></button>
+                <button className="control-btn"><FontAwesomeIcon icon={faRedo} fixedWidth /></button>
             </div>
         </div>
+            <div id="portfolio-details">
+    {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
+    
+    {/* --- NUEVO CONTENEDOR PARA LOS BOTONES --- */}
+    <div className="action-buttons-container">
+        
+        {/* Botón de Spotify que ya tienes */}
+        {currentBeat.spotifyUrl && (
+            <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-btn">
+                <FontAwesomeIcon icon={faSpotify} /> 
+                <span>Escuchar en Spotify</span>
+            </a>
+        )}
+
+        {/* --- NUEVO BOTÓN DE COLABORACIÓN --- */}
+        <button className="collaboration-btn">
+            Request Collaboration
+        </button>
+
+    </div>
+</div>
+        </div>
+
     </div>
   );
 }
