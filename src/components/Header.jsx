@@ -16,7 +16,7 @@ function Header({ currentBeat }) {
             'Z'
           )}
         </div>
-        <span className="brand-name">ZaetaMusic</span>
+        <span className="brand-name">LujoUrban</span>
       </div>
       <div className="header-controls">
         <button className="header-btn"><FontAwesomeIcon icon={faSearch} fixedWidth  /></button>
