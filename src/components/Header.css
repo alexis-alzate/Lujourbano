@@ -1,65 +1,83 @@
-/* src/components/Header.css */
-
+/* Header.css */
 .app-header {
-    display: flex;
-    justify-content: space-between; /* Empuja los elementos a los extremos */
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background-color: var(--medium-grey);
-    border-bottom: 1px solid #282828;
-
-    /* --- REGLAS DE ESTABILIDAD --- */
-    height: 75px; /* Le damos una altura fija para que nunca cambie */
-    flex-shrink: 0; /* Le prohibimos encogerse */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  height: 60px;
+  flex-shrink: 0;
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+/* Controles de ventana macOS */
+.window-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-/* El "marco" para el logo */
-.brand-logo {
-    width: 40px;
-    height: 40px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: black;
-    overflow: hidden; /* Importante para que la imagen de adentro no se salga */
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* La imagen que se adapta al marco */
-.brand-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.window-dot.red {
+  background: #ff5f57;
 }
 
-.brand-name {
-    font-weight: bold;
-    font-size: 1.2rem;
+.window-dot.yellow {
+  background: #ffbd2e;
 }
 
-.header-controls {
-    display: flex;
-    gap: 1rem;
+.window-dot.green {
+  background: #28ca42;
 }
 
-.header-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.2s ease;
+.window-dot:hover {
+  opacity: 0.8;
 }
 
-.header-btn:hover {
-    color: var(--light-grey);
+/* Controles del header */
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.header-icon-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Botón de usuario con notificación */
+.user-btn {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background: #ff5f57;
+  border-radius: 50%;
+  border: 2px solid #0f1117;
 }

@@ -1,9 +1,12 @@
+// Player.jsx - REDISEÑADO CON COMPONENTES MODULARES
 import { useState, useEffect } from 'react';
 import './Player.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faForward, faBackward, faRandom, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
-import Visualizer from './Visualizer.jsx'; // Importamos nuestro nuevo componente
+import Visualizer from './Visualizer.jsx';
+import ProducerProfile from './ProducerProfile.jsx';
+import BehindTheTrack from './BehindTheTrack.jsx';
 
 const formatTime = (seconds) => {
   if (isNaN(seconds) || seconds < 0) return '0:00';
@@ -12,7 +15,7 @@ const formatTime = (seconds) => {
   return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
 
-function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef }) {
+function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef, producerImage }) {
   const [trackProgress, setTrackProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -28,17 +31,10 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
     };
   }, [audioRef, currentBeat]);
 
-  useEffect(() => {
-    if (currentBeat) {
-      document.title = `${currentBeat.title} - ${currentBeat.artist || 'Beat en Venta'}`;
-    }
-  }, [currentBeat]);
-
-  const handleScrub = (e) => {
-    if (duration) {
-      const scrubTime = (e.nativeEvent.offsetX / e.target.clientWidth) * duration;
-      audioRef.current.currentTime = scrubTime;
-    }
+  const handleScrub = (value) => {
+    const scrubTime = value;
+    audioRef.current.currentTime = scrubTime;
+    setTrackProgress(scrubTime);
   };
 
   if (!currentBeat) {
@@ -47,55 +43,82 @@ function Player({ currentBeat, isPlaying, onPlayPause, onNext, onPrev, audioRef 
 
   return (
     <div className="player-main">
-        {/* --- REEMPLAZAMOS LA CARÁTULA POR EL VISUALIZADOR --- */}
-        <Visualizer audioRef={audioRef} isPlaying={isPlaying} />
-        
-        <div className="track-info">
-           {/*  <h2 id="track-title">{currentBeat.title}</h2> */}
-           {/*  <p id="track-producer">{currentBeat.producer}</p> */}
-           {/*  {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>} */}
-            
-        <div className="player-controls-container">
-            <div className="progress-container">
-                <span>{formatTime(trackProgress)}</span>
-                <div className="progress-bar-wrapper" onClick={handleScrub}>
-                    <div className="progress-bar" style={{ width: duration ? `${(trackProgress / duration) * 100}%` : '0%' }}></div>
-                </div>
-                <span>{formatTime(duration)}</span>
-            </div>
-            <div className="player-controls">
-                <button className="control-btn"><FontAwesomeIcon icon={faRandom} fixedWidth /></button>
-                <button className="control-btn" onClick={onPrev}><FontAwesomeIcon icon={faBackward} fixedWidth /></button>
-                <button className="control-btn play-btn" onClick={onPlayPause}>
-                    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} fixedWidth />
-                </button>
-              <button className="control-btn" onClick={onNext}><FontAwesomeIcon icon={faForward} fixedWidth /></button>
-                <button className="control-btn"><FontAwesomeIcon icon={faRedo} fixedWidth /></button>
-            </div>
+      {/* Perfil del productor */}
+      <ProducerProfile 
+        producerImage={producerImage || currentBeat.coverSrc}
+        producerName="Producer Maw"
+      />
+
+      {/* Visualizador de onda */}
+      <Visualizer 
+        audioRef={audioRef} 
+        isPlaying={isPlaying}
+      />
+
+      {/* Controles de reproducción */}
+      <div className="player-controls-wrapper">
+        {/* Tiempo y barra de progreso */}
+        <div className="time-display">
+          <span>{formatTime(trackProgress)}</span>
+          <input
+            type="range"
+            min="0"
+            max={duration || 0}
+            value={trackProgress}
+            onChange={(e) => handleScrub(e.target.value)}
+            className="progress-slider"
+          />
+          <span>{formatTime(duration)}</span>
         </div>
-            <div id="portfolio-details">
-    {currentBeat.artist && <p className="artist-name">{currentBeat.artist}</p>}
-    
-    {/* --- NUEVO CONTENEDOR PARA LOS BOTONES --- */}
-    <div className="action-buttons-container">
-        
-        {/* Botón de Spotify que ya tienes */}
-        {currentBeat.spotifyUrl && (
-            <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-btn">
-                <FontAwesomeIcon icon={faSpotify} /> 
-                <span>Escuchar en Spotify</span>
-            </a>
+
+        {/* Botones de control */}
+        <div className="control-buttons">
+          <button className="control-btn small-btn">
+            <FontAwesomeIcon icon={faRandom} />
+          </button>
+          <button className="control-btn" onClick={onPrev}>
+            <FontAwesomeIcon icon={faBackward} />
+          </button>
+          <button className="play-pause-btn" onClick={onPlayPause}>
+            <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+          </button>
+          <button className="control-btn" onClick={onNext}>
+            <FontAwesomeIcon icon={faForward} />
+          </button>
+          <button className="control-btn small-btn">
+            <FontAwesomeIcon icon={faRedo} />
+          </button>
+        </div>
+      </div>
+
+      {/* Info del track actual */}
+      <div className="current-track-info">
+        <h3 className="track-title">{currentBeat.title}</h3>
+        <p className="track-subtitle">{currentBeat.producer}</p>
+      </div>
+
+      {/* Behind The Track */}
+      <BehindTheTrack 
+        description="The beat captures the essence of modern urban soundscapes with layered synthesizers and punchy 808s."
+      />
+
+      {/* Botones de acción */}
+      <div className="action-buttons">
+        {currentBeat.spotifyUrl ? (
+          <a href={currentBeat.spotifyUrl} target="_blank" rel="noopener noreferrer" className="spotify-button">
+            <FontAwesomeIcon icon={faSpotify} />
+            <span>Listen on Spotify</span>
+          </a>
+        ) : (
+          <button className="spotify-button" disabled style={{opacity: 0.6, cursor: 'not-allowed'}}>
+            <FontAwesomeIcon icon={faSpotify} />
+            <span>Listen on Spotify</span>
+          </button>
         )}
-
-        {/* --- NUEVO BOTÓN DE COLABORACIÓN --- */}
-        <button className="collaboration-btn">
-            Request Collaboration
+        <button className="collab-button">
+          Request Collaboration
         </button>
-
-    </div>
-</div>
-        </div>
-
+      </div>
     </div>
   );
 }

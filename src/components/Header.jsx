@@ -1,30 +1,30 @@
-// src/components/Header.jsx
+// Header.jsx
+import React from 'react';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 
-// Ahora el Header recibe el 'currentBeat' como prop
-function Header({ currentBeat }) {
+function Header() {
   return (
-    <header className="app-header">
-      <div className="brand">
-        <div className="brand-logo">
-          {/* Si existe un currentBeat, muestra su imagen. Si no, muestra la "Z". */}
-  {/*    {currentBeat ? (
-            <img src={currentBeat.coverSrc} alt="Carátula del beat actual" />
-          ) : (
-            'Z'
-          )} */}
-        </div>
-        <span className="brand-name">LujoUrban</span>
+    <div className="app-header">
+      {/* Botones de ventana macOS */}
+      <div className="window-controls">
+        <div className="window-dot red"></div>
+        <div className="window-dot yellow"></div>
+        <div className="window-dot green"></div>
       </div>
-      <div className="header-controls">
-        <button className="header-btn"><FontAwesomeIcon icon={faSearch} fixedWidth  /></button>
-        <button className="header-btn"><FontAwesomeIcon icon={faBars} fixedWidth /></button>
-        
-            
+
+      {/* Controles del lado derecho */}
+      <div className="header-actions">
+        <button className="header-icon-btn">
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+        <button className="header-icon-btn user-btn">
+          <FontAwesomeIcon icon={faUser} />
+          <span className="notification-dot"></span>
+        </button>
       </div>
-    </header>
+    </div>
   );
 }
 

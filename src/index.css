@@ -1,9 +1,13 @@
+/* index.css - ESTILOS GLOBALES PREMIUM */
 :root {
   --primary-color: #ff6a00;
-  --dark-grey: #1c1f25;
-  --medium-grey: #1c1f25;
-  --light-grey: #e0e0e0;
-  --text-muted: #b3b3b3;
+  --dark-bg: #0a0c10;
+  --medium-bg: #0f1117;
+  --card-bg: #1a1d24;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted: #666666;
+  --border-color: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -13,50 +17,130 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: var(--dark-grey);
-  color: var(--light-grey);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-primary);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
-}
-
-/* --- ESTILOS PARA ESCRITORIO --- */
-.window-container {
-  background-color: var(--medium-grey);
-  border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  padding: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 800px; /* Ancho fijo para PC */
 }
 
+/* Efecto de fondo con gradiente */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 106, 0, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
 
+/* Contenedor principal - RESPONSIVE */
+.window-container {
+  background: var(--medium-bg);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8),
+              0 0 100px rgba(255, 106, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  width: 90vw;
+  height: 90vh;
+  max-width: 900px;
+  max-height: 700px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
 
-/* --- REGLAS PARA RESPONSIVE EN CELULAR --- */
-@media (max-width: 850px) {
-  /* Cuando la pantalla mida 850px o menos... */
+#beat-player {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100% - 60px);
+}
 
+/* Para pantallas muy grandes */
+@media (min-width: 1200px) {
+  .window-container {
+    width: 900px;
+    height: 700px;
+  }
+}
+
+/* Para pantallas medianas */
+@media (max-width: 1024px) {
+  .window-container {
+    width: 95vw;
+    height: 95vh;
+  }
+}
+
+/* Responsive móvil */
+@media (max-width: 950px) {
   body {
-    padding: 0; /* Quitamos el padding del body para que la app ocupe toda la pantalla */
+    padding: 0;
   }
 
   .window-container {
-    width: 100%; /* La app ocupa el 100% del ancho del celular */
+    width: 100vw;
     height: 100vh;
     max-width: 100%;
+    max-height: 100%;
     border-radius: 0;
     border: none;
   }
-#beat-player {
-    display: flex;
-    flex-grow: 1; /* Permite que ocupe el espacio vertical restante */
-    /* --- NUEVOS AJUSTES DE LAYOUT --- */
-    flex-direction: column; /* Organiza los elementos internos en columna */
-    justify-content: flex-start; /* Alinea los elementos al inicio (arriba) del contenedor */
-    align-items: stretch; /* Estira los elementos horizontalmente para que ocupen todo el ancho */
+
+  #beat-player {
+    flex-direction: column;
+  }
 }
+
+/* Animaciones globales */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-/* --- REGLAS PARA RESPONSIVE EN CELULAR --- */
+
+/* Transiciones suaves */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+/* Mejoras de texto */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Botones globales */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
